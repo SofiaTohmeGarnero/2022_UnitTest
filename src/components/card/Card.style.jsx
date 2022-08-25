@@ -25,11 +25,6 @@ img {
     display: flex;
     justify-content: center;
     align-items:center;
-    .icon-img-card {
-        width:40px;
-        height:50px;
-        fill:rgb(168, 170, 173);
-    }
 }
 h3 {
     margin: 5px;
