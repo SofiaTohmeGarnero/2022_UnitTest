@@ -15,7 +15,8 @@ const config  = {
     "assets/(.*)": [
       "<rootDir>/src/assets/$1",
     ]
-  }
+  },
+  testEnvironment: "jsdom"
 };
 
 module.exports = config;
