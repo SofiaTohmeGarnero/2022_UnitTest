@@ -15,7 +15,7 @@ font-size: 32px;
 margin: 2px;
 color: #FAFAFA;
 }
-a {
+div {
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -30,7 +30,6 @@ a {
  width: 20px;
  height: 20px;
  margin: 10px;
- fill: rgb(33, 150, 243);
 }
 `;
 
