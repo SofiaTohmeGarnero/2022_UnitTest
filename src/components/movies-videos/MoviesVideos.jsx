@@ -12,7 +12,7 @@ const MoviesVideos = () => {
 
     return (
         <MoviesVideosContainer>
-            {info && info.results.map(video => {
+            {info && info.results?.map(video => {
                 return (
                     <VideoDetails>
                         <iframe
@@ -23,6 +23,7 @@ const MoviesVideos = () => {
                             src={`https://www.youtube.com/embed/${video.key}`}
                             frameBorder="0"
                             title={video.name}
+                            role='iframe'
                         />
                         <h4>{video.name}</h4>
                     </VideoDetails>
