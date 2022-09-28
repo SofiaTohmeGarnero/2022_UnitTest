@@ -9,11 +9,6 @@ img {
     width: 350px;
     height: auto;
 }
-.icon-img-card {
-    width:40px;
-    height:50px;
-    fill:rgb(168, 170, 173);
-}
 
 @media (max-width: 770px) {
     img {
@@ -45,8 +40,9 @@ p {
     font-size: 20px;
     font-weight: lighter;
     line-height: 20px;
-    a {
+    span {
     color: rgb(33, 150, 243);
+    cursor: pointer;
     margin: 10px;
     text-decoration: none;
     :focus {
