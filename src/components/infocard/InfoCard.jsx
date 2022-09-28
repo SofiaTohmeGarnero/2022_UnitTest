@@ -24,7 +24,6 @@ const InfoCard = () => {
   const externalsIds = useFetch([3, params.media, params.id, "external_ids"]);
 
   const arrExt = externalsIds && Object.entries(externalsIds);
-  console.log(info);
 
   return (
     <>
