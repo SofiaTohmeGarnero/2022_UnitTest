@@ -40,7 +40,7 @@ const mockMovieData = {
   adult: false,
   backdrop_path: "/nnUQqlVZeEGuCRx8SaoCU4XVHJN.jpg",
   belongs_to_collection: null,
-  budget: 0,
+  budget: 250000000,
   genres: [
     { id: 14, name: "Fantasía" },
     { id: 12, name: "Aventura" },
@@ -68,7 +68,7 @@ const mockMovieData = {
     { iso_3166_1: "US", name: "United States of America" },
   ],
   release_date: "2022-09-07",
-  revenue: 0,
+  revenue: 758004063,
   runtime: 105,
   spoken_languages: [
     { english_name: "English", iso_639_1: "en", name: "English" },
@@ -79,6 +79,58 @@ const mockMovieData = {
   video: false,
   vote_average: 6.761,
   vote_count: 722,
+};
+
+const mockTvData = {
+  adult: false,
+  backdrop_path: "/pdfCr8W0wBCpdjbZXSxnKhZtosP.jpg",
+  episode_run_time: [60],
+  first_air_date: "2022-09-01",
+  genres: [
+    { id: 10765, name: "Sci-Fi & Fantasy" },
+    { id: 10759, name: "Action & Adventure" },
+    { id: 18, name: "Drama" },
+  ],
+  homepage: "https://www.amazon.com/dp/B09QHC2LZM",
+  id: 84773,
+  in_production: true,
+  languages: ["en"],
+  last_air_date: "2022-09-22",
+  last_episode_to_air: {
+    air_date: "2022-09-22",
+    episode_number: 5,
+    id: 3894853,
+    name: "Despedidas",
+    overview:
+      "Nori cuestiona su instinto. Elrond lucha por mante…os habitantes del sur se preparan para el ataque.",
+  },
+  name: "El Señor de los Anillos: Los anillos de poder",
+  networks: [
+    {
+      id: 1024,
+      name: "Amazon",
+      logo_path: "/ifhbNuuVnlwYy5oXA5VIb2YR8AZ.png",
+      origin_country: "",
+    },
+  ],
+  next_episode_to_air: {
+    air_date: "2022-09-29",
+    episode_number: 6,
+    id: 3894854,
+    name: "Episodio 6",
+    overview: "",
+  },
+  number_of_episodes: 8,
+  number_of_seasons: 1,
+  origin_country: ["US"],
+  original_language: "en",
+  original_name: "The Lord of the Rings: The Rings of Power",
+  overview:
+    "Un reparto coral de personajes —unos conocidos y otros nuevos— debe afrontar la reaparición del mal en la Tierra Media. Desde las profundidades más oscuras de las Montañas Nubladas hasta los majestuosos bosques de Lindon, desde el reino insular de Númenor hasta los extremos más remotos del mapa, estos parajes y personajes forjarán los legados que perdurarán más allá de su desaparición.",
+  popularity: 4150.076,
+  poster_path: "/k6Reu01wavDga2nMOSCKjg3Npdu.jpg",
+  vote_average: 7.658,
+  vote_count: 812,
 };
 
 /**useFetch mock */
@@ -122,15 +174,28 @@ describe("InfoCard", () => {
     });
   });
   describe("when rendering a movie", () => {
-    it("should show a poster image", () => {
+    beforeEach(() => {
       useParams.mockImplementation(() => ({
         media: "movie",
         id: "532639",
       }));
       mockUseFetch.mockReturnValue(mockMovieData);
       render(<InfoCard />);
+    });
+    it("should show a poster image", () => {
       const posterImage = screen.getByAltText(mockMovieData.title);
       expect(posterImage).toBeInTheDocument();
+    });
+    it("should show length of a movie", () => {
+      expect(screen.getByText(/Duracion:105 min/i)).toBeInTheDocument();
+    });
+    it("should show budget and revenue of a movie", () => {
+      expect(
+        screen.getByText("Presupuesto: $ 250,000,000")
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText("Recaudacion: $ 758,004,063")
+      ).toBeInTheDocument();
     });
   });
   describe("when clicking on a movie genre", () => {
@@ -150,6 +215,27 @@ describe("InfoCard", () => {
         );
       });
       expect(genreLink).toBeInTheDocument();
+    });
+  });
+  describe("when rendering a tv serie", () => {
+    beforeEach(() => {
+      useParams.mockImplementation(() => ({
+        media: "tv",
+        id: "84773",
+      }));
+      mockUseFetch.mockReturnValue(mockTvData);
+      render(<InfoCard />);
+    });
+    it("should show length of a serie", () => {
+      expect(screen.getByText(/Duracion:60 min/i)).toBeInTheDocument();
+    });
+    it("should show number of episodes and number of seasons", () => {
+      expect(
+        screen.getByText("Temporadas: 1")
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText("Episodios: 8")
+      ).toBeInTheDocument();
     });
   });
 });

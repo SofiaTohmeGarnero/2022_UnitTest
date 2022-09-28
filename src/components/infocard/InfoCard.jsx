@@ -24,7 +24,7 @@ const InfoCard = () => {
   const externalsIds = useFetch([3, params.media, params.id, "external_ids"]);
 
   const arrExt = externalsIds && Object.entries(externalsIds);
-  /* console.log(info); */
+  console.log(info);
 
   return (
     <>
@@ -72,7 +72,7 @@ const InfoCard = () => {
             {isPerson || (
               <>
                 <p>
-                  Duracion:
+                  Duracion: 
                   {isMovie ? info.runtime : info.episode_run_time[0]} min
                 </p>
                 <p>
