@@ -1,8 +1,7 @@
 import SearchBar from "./SearchBar.jsx";
 import React from "react";
-import { screen, render } from "@testing-library/react";
+import { screen, render, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import useFetch from "../../hooks/useFetch";
 import { useLocation, useHistory } from "react-router-dom";
 
 /**router mock */
@@ -11,8 +10,15 @@ jest.mock("react-router-dom", () => ({
     useHistory: jest.fn(),
   }));
   
+  const mockPush = jest.fn();
+  useHistory.mockImplementation(() => ({
+    push: mockPush,
+  }));
 
 describe("SearchBar", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
     describe("when rendering default", ()=>{
         it("should show search icon and input", ()=>{
             useLocation.mockImplementation(() => ({
@@ -21,6 +27,22 @@ describe("SearchBar", () => {
             render(<SearchBar/>);
             expect(screen.getByRole(/navbar-icon/i)).toBeInTheDocument();
             expect(screen.getByRole(/textbox/i)).toBeInTheDocument();
+        });
+    });
+    describe("when doing a search", () =>{
+      it("should display the keyword in the url", async () =>{
+        useLocation.mockImplementation(() => ({
+          pathname: "/",
+        }));
+        render(<SearchBar/>);
+        const searchInput = screen.getByRole(/textbox/i);
+
+        await userEvent.type(searchInput, 'harry');
+        await userEvent.type(searchInput, '{enter}');
+
+        await waitFor( () => {
+          expect(mockPush).toHaveBeenNthCalledWith(1, "/search/multi/harry/page/1");
         })
+      })
     })
 })

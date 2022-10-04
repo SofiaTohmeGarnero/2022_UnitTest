@@ -5,7 +5,7 @@ export const Icons = styled.div`
     margin: 5px 15px;
     width: 30px;
     height: 30px;
-    fill: ${(props) => (props.islocation ? "rgb(33, 150, 243)" : "white")};
+    fill: ${({islocation}) => (islocation ? "rgb(33, 150, 243)" : "white")};
     cursor: pointer;
     :hover {
       fill: rgb(33, 150, 243);

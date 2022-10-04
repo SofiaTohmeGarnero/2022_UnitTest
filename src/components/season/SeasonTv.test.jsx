@@ -172,7 +172,6 @@ describe("SeasonTv", () => {
         screen.getByRole("combobox"),
         screen.getByRole("option", { name: "Temporada 2" })
       );
-      screen.debug();
       await expect(
         screen.getByRole("option", { name: "Temporada 2" }).selected
       ).toBe(true);
