@@ -26,7 +26,7 @@ const SeasonTv = ({ seasons }) => {
       <select value={seasonNumber} onChange={handleChange}>
         {seasons.map((element) => {
           return (
-            <option value={element.season_number}>
+            <option value={element.season_number} key={element.season_number}>
               Temporada {element.season_number}
             </option>
           );

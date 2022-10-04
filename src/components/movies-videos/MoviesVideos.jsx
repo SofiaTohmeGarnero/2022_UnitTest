@@ -12,9 +12,9 @@ const MoviesVideos = () => {
 
     return (
         <MoviesVideosContainer>
-            {info && info.results?.map(video => {
+            {info && info.results?.map((video, i ) => {
                 return (
-                    <VideoDetails>
+                    <VideoDetails key={i}>
                         <iframe
                             id={video.id}
                             type="text/html"
