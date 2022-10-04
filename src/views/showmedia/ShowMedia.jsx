@@ -23,7 +23,7 @@ const ShowMedia = ({ mediaType, title }) => {
             :
             [3, mediaType.media, mediaType.mediagenres]);
 
-    const data = useFetch(propsFetch, obj ? obj : "");
+    const data = useFetch(propsFetch, obj); /*ANTES: useFetch(propsFetch, obj ? obj : ""); quite la rama obj, pq no se usaba*/
 
     return (
         <ShowMediaContainer>
