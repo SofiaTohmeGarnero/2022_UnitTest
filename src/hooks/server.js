@@ -54,6 +54,7 @@ export const handlers = [
   rest.get(
     "https://api.themoviedb.org/3/:mediagenres/:media/week",
     async (req, res, ctx) => {
+      //console.log(req.url);
       const media = req.params.media;
       const mediagenres = req.params.mediagenres;
       const query = req.url.searchParams;
@@ -63,7 +64,7 @@ export const handlers = [
         mediagenres === "trending" &&
         query.get("api_key") === "84e25ac11ad6125024e1d376337be05f" &&
         query.get("language") === "es-ES" &&
-        query.get("page") === "1" 
+        query.get("page") === "1"
       ) {
         return res(
           ctx.json({
@@ -73,7 +74,23 @@ export const handlers = [
             total_results: 20000,
           })
         );
-      } 
+      }
+      if (
+        media === "tv" &&
+        mediagenres === "trending" &&
+        query.get("api_key") === "84e25ac11ad6125024e1d376337be05f" &&
+        query.get("language") === "es-ES" &&
+        query.get("page") === "1"
+      ) {
+        return res(
+          ctx.json({
+            page: 1,
+            results: [],
+            total_pages: 1000,
+            total_results: 20000,
+          })
+        );
+      }
     }
   ),
 ];
