@@ -15,7 +15,7 @@ img {
     object-fit: cover;
     
 }
-.icon-img-card {
+.icon-img-card svg{
         width:100px;
         height:200px;
         fill:rgb(168, 170, 173);
