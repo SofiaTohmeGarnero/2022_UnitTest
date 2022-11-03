@@ -264,7 +264,6 @@ describe("IndividualCard", () => {
           <Route path={'/:media/:id/videos'} component={IndividualCard} />
         </Router>
       ); 
-      screen.debug()
       const hugeImage = screen.getByAltText(mockMovieData.title);
       expect(hugeImage).toBeInTheDocument();
       expect(screen.getByText("INFO")).toBeInTheDocument();
