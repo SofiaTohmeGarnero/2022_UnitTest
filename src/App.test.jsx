@@ -55,27 +55,67 @@ describe("App", () => {
     });
   });
   describe("when redering lazy components", () => {
+    /** funciona en conjunto con: > __mocks__ > react-router-dom.js */ 
     describe("with '/' in the url", () => {
       it("should show Home component", async () => {
         /**covergage arroja un warning */
-        const history = createMemoryHistory();
-        history.push("/");
-        const {getByText} = render(
-          <Router history={history}>
-            <Route path={"/"} component={App} />
-          </Router>
+        const { getByText } = render(
+          <MemoryRouter initialEntries={['/']}>
+            <App />
+          </MemoryRouter>
         );
         await waitFor(() => expect(getByText("Home")).toBeInTheDocument());
       });
     });
     describe("with '/movie' in the url", () => {
-      it("should show Genres component", async () => {        
+      it("should show Genres component", async () => {  
+             
         const { getByText } = render(
           <MemoryRouter initialEntries={['/movie']}>
             <App />
           </MemoryRouter>
         );
         await waitFor(() => expect(getByText("Genres")).toBeInTheDocument());
+      });
+    }); 
+    describe("with '/search/multi/harry/page/1' in the url", () => {
+      it("should show MediaView component", async () => {       
+        const { getByText } = render(
+          <MemoryRouter initialEntries={['/search/multi/harry/page/1']}>
+            <App />
+          </MemoryRouter>
+        );
+        await waitFor(() => expect(getByText("MediaView")).toBeInTheDocument());
+      });
+    }); 
+    describe("with '/person/10980/credits' in the url", () => {
+      it("should show PersonView component", async () => {      
+        const { getByText } = render(
+          <MemoryRouter initialEntries={['/person/10980/credits']}>
+            <App />
+          </MemoryRouter>
+        );
+        await waitFor(() => expect(getByText("PersonView")).toBeInTheDocument());
+      });
+    }); 
+    describe("with '/tv/1396/seasons/1' in the url", () => {
+      it("should show IndividualCard component", async () => {   
+        const { getByText } = render(
+          <MemoryRouter initialEntries={['/tv/1396/seasons/1']}>
+            <App />
+          </MemoryRouter>
+        );
+        await waitFor(() => expect(getByText("IndividualCard")).toBeInTheDocument());
+      });
+    }); 
+    describe("with every path in the url", () => {
+      it("should show NotFound component", async () => {       
+        const { getByText } = render(
+          <MemoryRouter initialEntries={['/login/hello/world/everyone/100']}>
+            <App />
+          </MemoryRouter>
+        );
+        await waitFor(() => expect(getByText("NotFound")).toBeInTheDocument());
       });
     }); 
   });
