@@ -68,18 +68,16 @@ describe("App", () => {
         await waitFor(() => expect(getByText("Home")).toBeInTheDocument());
       });
     });
-    /* xdescribe("with '/movie' in the url", () => {
-      it("should show Genres component", async () => {
-        const history = createMemoryHistory();
-        history.push("/movie");
+    describe("with '/movie' in the url", () => {
+      it("should show Genres component", async () => {        
         const { getByText } = render(
-          <Router history={history}>
-            <Route path={"/:media"} component={App} />
-          </Router>
+          <MemoryRouter initialEntries={['/movie']}>
+            <App />
+          </MemoryRouter>
         );
         await waitFor(() => expect(getByText("Genres")).toBeInTheDocument());
       });
-    }); */
+    }); 
   });
   describe("when checking location in tests", () => {
     describe("with '/movie' in the url", () => {
